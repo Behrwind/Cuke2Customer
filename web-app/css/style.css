@@ -1,0 +1,101 @@
+#header {
+  padding: .5em;
+}
+
+#header, .footer, #goUpLinkContainer {
+  background-color: #abbf78;
+  background-image: -moz-linear-gradient(top, #dff3a1, #abbf78);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #dff3a1), color-stop(1, #abbf78));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#dff3a1', EndColorStr = '#abbf78');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#dff3a1', EndColorStr='#abbf78')";
+}
+
+.footer {
+  color: #000;
+  clear: both;
+  font-size: 0.8em;
+  margin-top: 1.5em;
+  padding: 1em;
+  min-height: 1em;
+}
+
+#header h1 {
+  float: left;
+  color: #2f5d23;
+  font-size: 1.75em;
+  margin: 0.5em;
+}
+
+#header div.search {
+  float: right;
+  margin-top: 0.8em;
+  margin-right: 0.6em;
+}
+
+.content {
+  padding: .5em;
+  float: left;
+  width: 65%;
+}
+
+div.featureMenu {
+  width: 30%;
+  float: left;
+  padding: .5em 0;
+}
+
+div.featureMenu ul {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+div.featureMenu li.topLevel {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+div.featureMenu li.directory {
+    margin-top: 0.25em;
+}
+
+div.featureMenu li.featureLink {
+    margin-top: 0.25em;
+}
+
+div.featureMenu li.current {
+  font-style: italic;
+  font-weight: bold;
+}
+
+#expandAllDiv {
+  margin-top: 10px;
+}
+
+div.searchTitle {
+  background-color: #f2ffe1;
+  padding: .5em;
+  border: 1px solid #add8e6;
+}
+
+div.searchResult {
+  margin: 1em .5em;
+}
+
+div.searchPaging a, div.searchPaging .currentStep {
+  margin: 0 .2em;
+}
+
+#goUpLinkContainer {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  right: 0;
+  padding: .5em;
+  border: 1px solid #add8e6;
+}
+
+#goUpLinkContainer a {
+  color: #2f5d23;
+}

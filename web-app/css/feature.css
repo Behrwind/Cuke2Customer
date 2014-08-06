@@ -1,0 +1,253 @@
+p {
+  margin: .2em
+}
+
+.indented {
+  margin-left: 1.2em;
+}
+
+div.scenario {
+  background-color: #fff;
+  background-image: -moz-linear-gradient(center top, #fff, #dfefff);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dcefff));
+  background-image: linear-gradient(top, #fff, #dcefff);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#dcefff');
+  background-repeat: no-repeat;
+  clear: both;
+}
+
+div.scenario.odd, div.quickAccessLinks {
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(center top, #fdfdfd, #eee);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fdfdfd), color-stop(1, #eee));
+  background-image: linear-gradient(top, #fdfdfd, #eee);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#fdfdfd', EndColorStr = '#eeeeee');
+  background-repeat: no-repeat;
+}
+
+div.scenario, div.background, div.comment {
+  margin-top: 1em;
+  border: 1px solid #add8e6;
+  padding: .2em .2em .7em;
+}
+
+div.background {
+  background-color: #f2ffe1;
+  background-image: -moz-linear-gradient(center top, #fff, #f2ffe1);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #f2ffe1));
+  background-image: linear-gradient(top, #fff, #f2ffe1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#f2ffe1');
+  clear: both;
+}
+
+.title, .commentsHeading {
+  font-weight: bold;
+  color: #00008b;
+  margin-top: .5em;
+}
+
+.jiraId {
+  font-weight: normal;
+  font-size: smaller;
+}
+
+.jiraId a {
+  color: #00008b;
+}
+
+.feature {
+  float: left;
+  padding-left: .2em;
+}
+
+div.jira {
+  float: right;
+  background-color: #114070;
+  padding: 3px 5px 3px 70px;
+  white-space: nowrap;
+  background-image: url("../images/jira.png");
+  background-repeat: no-repeat;
+  background-position: 5px 8px;
+  min-height: 35px;
+  color: #FFFFFF;
+}
+
+div.jiraLinks {
+  font-size: .85em;
+  float: right;
+  margin-left: .2em;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+div.jira a {
+  color: #fff;
+}
+
+div.jira img {
+  float: left;
+  margin: 5px;
+}
+
+.feature .title {
+  font-size: 1.5em;
+  margin-left: 0;
+}
+
+.tags {
+  color: #00008b;
+  font-style: italic;
+  font-weight: normal;
+  font-size: .8em;
+  float: left;
+  margin-left: .5em;
+}
+
+.description {
+  white-space: pre-wrap;
+  margin-bottom: .5em;
+  font-style: italic;
+  clear: left;
+}
+
+.featureHead .description {
+    padding-top: .3em;
+}
+
+.keyword {
+  color: #1e90ff;
+}
+
+.placeHolder {
+  font-style: italic;
+}
+
+table.indented {
+  margin-left: 2em;
+}
+
+table {
+  border: 1px solid #00008b;
+  border-collapse: collapse;
+  margin-bottom: .3em;
+  margin-top: .3em;
+  clear: both;
+  font-size: .85em;
+}
+
+td {
+  background: white;
+  padding: .3em;
+}
+
+td, th {
+  border: 1px solid #00008b;
+  text-align: center;
+}
+
+th div {
+  background-color: #efefef;
+  background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
+  font-weight: bold;
+  line-height: 1.7em;
+  padding: .3em;
+}
+
+thead th {
+  white-space: nowrap;
+}
+
+.steps {
+  clear: both;
+}
+
+.commentsHeading {
+  margin-top: 1.5em;
+}
+
+div.comment {
+  clear: both;
+  border: 1px solid #114070;
+    padding: 0;
+}
+
+.commentHead {
+  margin: 0;
+  background-color: #114070;
+  padding: .3em;
+  color: white;
+  font-weight: bold;
+  font-size: .8em;
+}
+
+.commentBody {
+  padding: .2em .5em;
+  white-space: pre-wrap;
+}
+
+#commentsExplanation {
+  clear: both;
+  float: none;
+}
+
+#commentsExplanation p {
+  font-size: 0.85em;
+  margin-left: .5em;
+}
+
+.lineOverScenarios {
+    font-size: .9em;
+    margin-top: .5em;
+    margin-bottom: 0;
+}
+
+div.quickAccess {
+  background: none;
+  line-height: 1.7em;
+  float: left;
+}
+
+div.quickAccess a {
+  color: #00008b;
+  text-decoration: none;
+}
+
+div.quickAccess a:hover {
+  color: #00008b;
+  text-decoration: underline;
+}
+
+div.quickAccess > a:hover {
+  text-decoration: none;
+}
+
+div.quickAccess > a {
+  background-image: url("../images/skin/sorted_desc.gif");
+  background-repeat: no-repeat;
+  background-position: right 50%;
+  padding-right: 10px;
+}
+
+div.quickAccess div.quickAccessLinks {
+  visibility: collapse;
+  z-index: 999;
+  position: absolute;
+  background-color: #dfefff;
+  border: 1px solid #ADD8E6;
+  padding: .3em;
+}
+
+div.quickAccess:hover div.quickAccessLinks {
+  visibility: visible;
+}
+
+div.tagMetadataSymbolKey {
+    float: right;
+}
+
+div.tagMetadataSymbolKey img {
+    margin-left: .5em;
+}

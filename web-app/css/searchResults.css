@@ -1,0 +1,10 @@
+#searchResults h1 {
+  color: #00008b;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: .25em 0;
+}
+#searchResults .title {
+  font-size: 1em;
+  margin: 1em 0 0 0;
+}
