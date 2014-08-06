@@ -97,7 +97,7 @@ log4j = {
         appender new DailyRollingFileAppender (
               name: 'file',
               datePattern: "'.'yyyy-MM-dd",  // See the API for all patterns.
-              fileName: "${System.getProperty('catalina.base') ?: 'target'}/logs/${config.project.shortName}-Features/MIMS-Features.log",
+              fileName: "${System.getProperty('catalina.base') ?: 'target'}/logs/${config.project.shortName}-Features/${config.project.shortName}-Features.log",
               layout: pattern (conversionPattern: '%d [%t] %-5p %c{2} %x - %m%n')
         )
     }
