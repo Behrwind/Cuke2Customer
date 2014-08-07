@@ -6,7 +6,7 @@ import org.tmatesoft.svn.core.wc.SVNRevision
 import org.tmatesoft.svn.core.wc.SVNUpdateClient
 import org.tmatesoft.svn.core.wc.SVNWCUtil
 
-class SvnAdapterService {
+class SvnAdapterService implements VersionControlAdapter {
 
     String svnUser
     String svnPassword

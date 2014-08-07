@@ -9,7 +9,7 @@ class FeatureController {
 
     def grailsApplication
 
-    SvnAdapterService svnAdapterService
+    VersionControlAdapter versionControlAdapter
     FeatureService featureService
     JiraService jiraService
 
@@ -47,7 +47,7 @@ class FeatureController {
         final String dir = grailsApplication.config.project.feature.directory
         if (useSvn()) {
             FileUtils.forceDelete(new File(dir))
-            svnAdapterService.checkoutLatestRevision (dir)
+            versionControlAdapter.checkoutLatestRevision (dir)
         }
         featureService.loadFeatures(dir)
         redirect(action: 'listFeatures')

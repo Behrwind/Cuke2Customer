@@ -8,7 +8,7 @@ beans = {
     def grailsApplication = Holders.grailsApplication
 
     if(grailsApplication.config.project.svn.integration.toUpperCase() == 'ON') {
-        svnAdapterService(SvnAdapterService) {
+        versionControlAdapter(SvnAdapterService) {
             svnUser = grailsApplication.config.project.svnUser
             svnPassword = grailsApplication.config.project.svnPassword
             svnUrl = grailsApplication.config.project.svnUrl
