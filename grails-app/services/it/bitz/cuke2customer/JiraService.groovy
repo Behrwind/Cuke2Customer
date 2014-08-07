@@ -1,5 +1,6 @@
 package it.bitz.cuke2customer
 
+import grails.util.Holders
 import groovyx.net.http.HTTPBuilder
 import it.bitz.cuke2customer.model.Comment
 import it.bitz.cuke2customer.model.Feature
@@ -30,7 +31,7 @@ class JiraService {
             def http = new HTTPBuilder(jiraUrl)
             http.setHeaders('Content-Type': 'application/json;')
             http.post(path: '/rest/auth/1/session', body: '{"username": "' + jiraUser + '", "password": "' + jiraPassword + '"}')
-            String jiraPrefix = grails.util.Holders.grailsApplication.config.project.jiraPrefix
+            String jiraPrefix = Holders.grailsApplication.config.project.jiraPrefix
             return http.get(path: "/rest/api/latest/issue/$jiraPrefix$feature.jiraId")
         } catch (Exception e) {
             log.error("unable to fetch JIRA issue for ${feature?.jiraId}", e)
