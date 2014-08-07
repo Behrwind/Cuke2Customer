@@ -1,0 +1,7 @@
+# ignore IDE files
+.idea/
+.settings/
+*.iml
+
+# ignore built files
+target/
