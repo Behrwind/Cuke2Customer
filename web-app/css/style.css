@@ -26,6 +26,12 @@
   margin: 0.5em;
 }
 
+#header a {
+    float: right;
+    font-size: .75em;
+    margin: 1.75em 2.5em;
+}
+
 #header div.search {
   float: right;
   margin-top: 0.8em;

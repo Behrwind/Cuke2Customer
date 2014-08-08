@@ -5,8 +5,8 @@
   <title>${grailsApplication.config.project.shortName}-Features</title>
 </head>
 <body>
-  <div id="retrieveFeatures">
-      <g:link controller="feature" action="retrieveFeatures"><g:message code="reload.features"/> </g:link>
+  <div>
+      <g:link controller="feature" action="retrieveFeatures"><g:message code="reload.features"/></g:link>
   </div>
 </body>
 </html>
