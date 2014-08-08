@@ -28,7 +28,7 @@ class FeatureController {
         String gherkin = featureService.getFeatureWithHashCode(featureHashCode)
         Feature feature = new GherkinParser(useJira()).parse(gherkin)
         List<Comment> jiraComments = fetchJiraComments(feature)
-        return [feature: feature, comments: jiraComments]
+        return [feature: feature, jiraIntegration: useJira(), comments: jiraComments]
     }
 
     private fetchJiraComments(Feature feature) {
