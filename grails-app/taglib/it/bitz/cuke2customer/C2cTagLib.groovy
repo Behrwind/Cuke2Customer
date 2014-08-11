@@ -12,10 +12,13 @@ class C2cTagLib {
         renderTagMetadataIcon ('hand', message(code: 'test.manual').toString(), shortOutput)
     }
 
+    private Closure doneRenderer = {boolean shortOutput ->
+        renderTagMetadataIcon ('check', message(code: 'done').toString(), shortOutput)
+    }
+
     private Map<String, Closure> metadataRenderers = [
-          'Done': { boolean shortOutput ->
-              renderTagMetadataIcon ('check', message(code: 'done').toString(), shortOutput)
-          },
+          'Done': doneRenderer,
+          'done': doneRenderer,
           'manual': manualRenderer,
           'manuell': manualRenderer,
           'new': { boolean shortOutput ->
