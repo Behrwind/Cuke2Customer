@@ -1,4 +1,5 @@
 import grails.util.Holders
+import it.bitz.cuke2customer.GitAdapterService
 import it.bitz.cuke2customer.JiraService
 import it.bitz.cuke2customer.SvnAdapterService
 import it.bitz.cuke2customer.enums.VCSIntegration
@@ -18,6 +19,13 @@ beans = {
     }
 
     switch (vcsIntegration) {
+        case VCSIntegration.GIT:
+            versionControlAdapter (GitAdapterService) {
+                gitUser = grailsApplication.config.project.vcsUser
+                gitPassword = grailsApplication.config.project.vcsPassword
+                gitUrl = grailsApplication.config.project.vcsUrl
+            }
+            break
         case VCSIntegration.SVN:
             versionControlAdapter (SvnAdapterService) {
                 svnUser = grailsApplication.config.project.vcsUser
