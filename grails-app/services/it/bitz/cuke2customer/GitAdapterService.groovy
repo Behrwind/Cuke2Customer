@@ -29,27 +29,20 @@ class GitAdapterService implements VersionControlAdapter {
     }
 
     private static void checkoutMaster (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        Git git = new Git (localRepository)
-        git.checkout ().setName ("master").call ()
+        getLocalGitRepository (destinationDirectory).checkout ().setName ("master").call ()
     }
 
     private static void checkoutNewMaster (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        Git git = new Git (localRepository)
-        git.checkout ().setCreateBranch (true).setName ("master")
+        getLocalGitRepository (destinationDirectory).checkout ().setCreateBranch (true).setName ("master")
                 .setUpstreamMode (CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
                 .setStartPoint ("origin/master").call ()
     }
 
     private void cloneRepository (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider (gitUser, gitPassword)
-        Git git = new Git (localRepository)
-        git.cloneRepository ()
+        getLocalGitRepository (destinationDirectory).cloneRepository ()
                 .setDirectory (new File (destinationDirectory))
                 .setURI (gitUrl)
-                .setCredentialsProvider (credentialsProvider)
+                .setCredentialsProvider (getCredentialsProvider ())
                 .call ()
     }
 
@@ -58,9 +51,7 @@ class GitAdapterService implements VersionControlAdapter {
     }
 
     private static boolean doesMasterBranchExist (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        Git git = new Git (localRepository)
-        List branches = git.branchList ().call ()
+        List branches = getLocalGitRepository (destinationDirectory).branchList ().call ()
         return 'refs/heads/master' in branches?.name
     }
 
@@ -69,20 +60,23 @@ class GitAdapterService implements VersionControlAdapter {
     }
 
     private void fetchRepository (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider (gitUser, gitPassword)
-        Git git = new Git (localRepository)
-        git.fetch ()
-                .setCredentialsProvider (credentialsProvider)
+        getLocalGitRepository (destinationDirectory).fetch ()
+                .setCredentialsProvider (getCredentialsProvider ())
                 .call ()
     }
 
-    private void pullMaster (String destinationDirectory) {
+    private UsernamePasswordCredentialsProvider getCredentialsProvider () {
+        return new UsernamePasswordCredentialsProvider (gitUser, gitPassword)
+    }
+
+    private static Git getLocalGitRepository (String destinationDirectory) {
         FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
-        UsernamePasswordCredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider (gitUser, gitPassword)
-        Git git = new Git (localRepository)
-        git.pull ()
-                .setCredentialsProvider (credentialsProvider)
+        return new Git (localRepository)
+    }
+
+    private void pullMaster (String destinationDirectory) {
+        getLocalGitRepository (destinationDirectory).pull ()
+                .setCredentialsProvider (getCredentialsProvider ())
                 .call ()
     }
 
