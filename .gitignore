@@ -5,3 +5,4 @@
 
 # ignore built files
 target
+/web-app/git/

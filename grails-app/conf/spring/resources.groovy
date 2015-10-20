@@ -21,6 +21,7 @@ beans = {
     switch (vcsIntegration) {
         case VCSIntegration.GIT:
             versionControlAdapter (GitAdapterService) {
+                ignoreInvalidCertificates = grailsApplication.config.project.git.ignoreInvalidCertificates.toUpperCase () == 'ON'
                 gitUser = grailsApplication.config.project.vcsUser
                 gitPassword = grailsApplication.config.project.vcsPassword
                 gitUrl = grailsApplication.config.project.vcsUrl
