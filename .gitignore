@@ -4,4 +4,4 @@
 *.iml
 
 # ignore built files
-target/
+target
