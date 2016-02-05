@@ -1,67 +1,58 @@
 package it.bitz.cuke2customer
 
-import org.eclipse.jgit.api.CreateBranchCommand
 import org.eclipse.jgit.api.Git
-import org.eclipse.jgit.internal.storage.file.FileRepository
+import org.eclipse.jgit.lib.Config
+import org.eclipse.jgit.lib.Repository
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 
 class GitAdapterService implements VersionControlAdapter {
 
+    boolean ignoreInvalidCertificates
     String gitUser
     String gitPassword
     String gitUrl
 
     void checkoutLatestRevision (String destinationDirectory) {
-        if (!doesDestinationDirectoryExist (destinationDirectory)) {
-            createDestinationDirectory (destinationDirectory)
-        }
-        if (repositoryHasBeenCloned (destinationDirectory)) {
-            fetchRepository (destinationDirectory)
-        } else {
-            cloneRepository (destinationDirectory)
-        }
-        if (doesMasterBranchExist (destinationDirectory)) {
-            checkoutMaster (destinationDirectory)
-        } else {
-            checkoutNewMaster (destinationDirectory)
-        }
-        pullMaster (destinationDirectory)
+        initRepository (destinationDirectory)
+        Git localRepository = getLocalGitRepository (destinationDirectory)
+        configureRepository (localRepository)
+        addOriginRemote (localRepository)
+        fetchOrigin (localRepository)
+        checkoutMaster (localRepository)
     }
 
-    private static void checkoutMaster (String destinationDirectory) {
-        getLocalGitRepository (destinationDirectory).checkout ().setName ("master").call ()
+    private void addOriginRemote (Git localRepository) {
+        Config localConfig = localRepository.getRepository ().getConfig ()
+        localConfig.setString ("remote", "origin", "url", gitUrl)
+        localConfig.setString ("remote", "origin", "fetch", "+refs/heads/*:refs/remotes/origin/*")
+        localConfig.save ()
     }
 
-    private static void checkoutNewMaster (String destinationDirectory) {
-        getLocalGitRepository (destinationDirectory).checkout ().setCreateBranch (true).setName ("master")
-                .setUpstreamMode (CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
-                .setStartPoint ("origin/master").call ()
+    private static void checkoutMaster (Git localRepository) {
+        localRepository.checkout ()
+                .setName ('refs/remotes/origin/master')
+                .call ()
     }
 
-    private void cloneRepository (String destinationDirectory) {
-        getLocalGitRepository (destinationDirectory).cloneRepository ()
-                .setDirectory (new File (destinationDirectory))
-                .setURI (gitUrl)
+    private void configureRepository (Git localRepository) {
+        Config localConfig = localRepository.getRepository ().getConfig ()
+        if (ignoreInvalidCertificates) {
+            localConfig.setBoolean ('http', null, 'sslVerify', false)
+        }
+        localConfig.save ()
+    }
+
+    private void fetchOrigin (Git localRepository) {
+        localRepository.fetch ()
+                .setRemote ('origin')
                 .setCredentialsProvider (getCredentialsProvider ())
                 .call ()
     }
 
-    private static void createDestinationDirectory (String destinationDirectory) {
-        new File (destinationDirectory).mkdir ()
-    }
-
-    private static boolean doesMasterBranchExist (String destinationDirectory) {
-        List branches = getLocalGitRepository (destinationDirectory).branchList ().call ()
-        return 'refs/heads/master' in branches?.name
-    }
-
-    private static boolean doesDestinationDirectoryExist (String destinationDirectory) {
-        return new File (destinationDirectory).exists ()
-    }
-
-    private void fetchRepository (String destinationDirectory) {
-        getLocalGitRepository (destinationDirectory).fetch ()
-                .setCredentialsProvider (getCredentialsProvider ())
+    private static void initRepository (String destinationDirectory) {
+        Git.init ()
+                .setDirectory (new File (destinationDirectory))
                 .call ()
     }
 
@@ -70,17 +61,8 @@ class GitAdapterService implements VersionControlAdapter {
     }
 
     private static Git getLocalGitRepository (String destinationDirectory) {
-        FileRepository localRepository = new FileRepository ("$destinationDirectory/.git")
+        FileRepositoryBuilder builder = new FileRepositoryBuilder ()
+        Repository localRepository = builder.setGitDir (new File ("$destinationDirectory/.git")).readEnvironment ().findGitDir ().build ()
         return new Git (localRepository)
-    }
-
-    private void pullMaster (String destinationDirectory) {
-        getLocalGitRepository (destinationDirectory).pull ()
-                .setCredentialsProvider (getCredentialsProvider ())
-                .call ()
-    }
-
-    private static boolean repositoryHasBeenCloned (String destinationDirectory) {
-        return new File ("$destinationDirectory/.git").exists ()
     }
 }
